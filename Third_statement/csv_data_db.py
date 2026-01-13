@@ -2,8 +2,10 @@ import pandas as pd
 import sqlite3
 
 df = pd.read_csv("names_emails.csv")
+
 conn = sqlite3.connect("names_emails.db")
 cursor = conn.cursor()
+
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -11,6 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
     email TEXT
 )
 """)
+
 for _, row in df.iterrows():
     cursor.execute(
         "INSERT INTO users (name, email) VALUES (?, ?)",
